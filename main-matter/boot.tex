@@ -1,0 +1,65 @@
+As with any RAG based solution, a vector database is a critical component of the architecture.
+It serves the purpose of the main \emph{knowledge base} for the system.
+
+To simplify the setup process, the document ingestion component and chat completion component are built into unified micro-service.
+This is written in \emph{Java} using \emph{Spring Framework} as it was deemed comfortable with team expertise of the members.
+
+Following are the steps to setup the microservice locally.
+
+
+Clone the sources from GitHub Repository:
+\begin{lstlisting}
+ git clone git@github.com:AyeshJayasekara/GovHack-2025-Backend.git
+\end{lstlisting}
+
+Build the executable from sources (Execute following within the cloned directory that contains the \emph{pom.xml} file):
+\begin{lstlisting}
+ mvn clean install -DskipTests
+\end{lstlisting}
+
+To spin up the service from the JAR file generated:
+\begin{lstlisting}
+ cd target
+ java -jar service-1.0.0.jar
+\end{lstlisting}
+
+At this point, the service should spin up. It is important to note that the Mistral service is required at the startup.
+If any problems persist, repeat instructions above and make sure that service is healthy before attempting to troubleshoot.
+
+
+\newsection{Populating the Vectorised Knowladge Base}
+
+At this point the local setup is ready to be populated with metadata of the system.
+To simplify this process a meta-data file has been prepared for following data sources as outlined in the challenge.
+
+\begin{itemize}
+    \item \textbf{Data Set 1:} \href{https://www.data.gov.au/data/dataset/freedom-of-information-statistics}{Freedom of Information Statistics on Data.gov.au}
+    \item \textbf{Data Set 2:} \href{https://www.kaggle.com/datasets/manishkumar21324/employee-leave-tracking-data}{Employee Leave Tracking Data on Kaggle}
+\end{itemize}
+
+See \href{https://github.com/AyeshJayasekara/GovHack-2025-Backend/tree/main/DATA}{GovHack 2025 Backend - DATA Directory} for metadata we
+prepared as part of data preparation step.
+
+Once you are ready execute below to instruct the backend service to populate the knowledge base.
+
+\begin{lstlisting}
+curl --location --request POST 'localhost:8080/rag/ingest'
+\end{lstlisting}
+
+
+\textbf{Congratulations! You are now ready to explore the capabilities of the PoC system.}
+
+\clearpage
+
+If you do not want to set up the front-end application to test the system in user-friendly way,
+you can interact with the system from terminal in the form of HTTP requests.
+
+Use the following cURL code snipped as a template and alter the \textbf{\emph{question}} parameter with your desired prompt to retrieve a response from the system.
+As to be expected, the terminal view may not be most reader friendly so we recommend to use the provided frontend system.
+
+\begin{lstlisting}
+curl --location 'localhost:8080/ask' \
+--header 'Content-Type: application/json' \
+--data '{
+    "question": "What is happening with leave patterns in my team?"
+}'\end{lstlisting}

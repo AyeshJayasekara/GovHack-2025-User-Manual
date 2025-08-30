@@ -1,0 +1,37 @@
+
+
+In order to avoid third party paid service LLM AI service providers, the PoC is designed to use a localised version of LLM.
+Our team has chosen \textbf{Mistral} for these purposes since it offers right balance of reasoning capabilities and resource intensity.
+However, by nature the model can be swapped to more powerful choice if resource permits and will not theoretically impact the purpose of the demonstration
+although such was never test due to limited time availability.
+
+Follow instructions below to set up \emph{Mistral} locally.
+
+
+Verify installation:
+\begin{lstlisting}
+ brew --version
+\end{lstlisting}
+
+Install Ollama CLI via Homebrew:
+\begin{lstlisting}
+ brew install ollama
+\end{lstlisting}
+
+Verify installation:
+\begin{lstlisting}
+ ollama --version
+\end{lstlisting}
+
+Pull required model and embedding model:
+\begin{lstlisting}
+ ollama pull mistral
+ ollama pull nomic-embed-text
+\end{lstlisting}
+
+To test running model execute following:
+\begin{lstlisting}
+ollama run mistral "Hello Mistral"
+\end{lstlisting}
+
+Your LLM model and embedding model is now ready to be used. Proceed to next step.

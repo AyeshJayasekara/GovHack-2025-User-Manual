@@ -1,0 +1,228 @@
+\documentclass[11pt,oneside,a4paper]{book}
+\usepackage[%
+  a4paper,%
+  left = 20mm,%
+  right = 20mm,%
+  textwidth = 178mm,%
+  top = 40mm,%
+  bottom = 30mm,%
+  %heightrounded,%
+  headheight=70pt,%
+  headsep=25pt,%
+]{geometry}
+\usepackage{graphicx}
+\usepackage[sfdefault,light]{FiraSans}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    allcolors  = link-blue, 
+}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{color,colortbl}
+
+\definecolor{link-blue}{RGB}{6,69,173}
+\definecolor{dark-green}{RGB}{52,133,62}
+\definecolor{light-blue}{RGB}{127,180,240}
+\definecolor{dark-blue}{RGB}{72,120,224}
+\definecolor{heading-grey}{RGB}{128,128,128}
+\definecolor{heading2-grey}{RGB}{200,200,200}
+\definecolor{Critical}{RGB}{192,0,0}
+\definecolor{High}{RGB}{255,0,0}
+\definecolor{Medium}{RGB}{255,192,0}
+\definecolor{Low}{RGB}{255,255,0}
+\definecolor{Informational}{RGB}{94,185,255}
+
+% Listings setup
+\usepackage{xcolor}
+\usepackage{listings}
+\definecolor{codegray}{gray}{0.9}
+\lstset{
+    backgroundcolor=\color{codegray},
+    basicstyle=\ttfamily,
+    frame=single,
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+}
+
+
+\usepackage{enumitem}
+\usepackage{array,booktabs}
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.2pt}
+\renewcommand{\headrulewidth}{0.2pt}
+\fancyfoot{}
+\fancyhead{}
+\fancyfoot[C]{User Manual}
+\fancypagestyle{plain}{
+    \fancyfoot[R]{\\ \textcolor{heading-grey}{\newline Page \thepage\ of \pageref{LastPage}}}
+    \fancyfoot[C]{\textcolor{heading-grey}{\textbf{Team V-SARK -- \projectno} \\ User Manual}}
+    \fancyhead[R]{\includegraphics[width=2cm]{img/logo-vsarc}}
+}
+\fancypagestyle{fancy}{
+    \fancyfoot[R]{\\ \textcolor{heading-grey}{\newline Page \thepage\ of \pageref{LastPage}}}
+    \fancyfoot[C]{\textcolor{heading-grey}{\textbf{Team V-SARK -- \projectno} \\ User Manual}}
+    \fancyhead{}
+}
+\thispagestyle{fancy}\pagestyle{plain}
+
+\newcommand{\email}[1]{\href{mailto://#1}{#1}}
+\newcommand{\newchapter}[1]{{\section*{#1}
+\addcontentsline{toc}{chapter}{#1}}}
+\newcommand{\newsection}[1]{{\subsection*{#1}
+\addcontentsline{toc}{section}{#1}}}
+\newcommand{\newsubsection}[1]{{\subsubsection*{#1}
+\addcontentsline{toc}{subsection}{#1}}}
+\usepackage[skip=10pt plus1pt, indent=0pt]{parskip}
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+\makeatletter
+\renewcommand\tableofcontents{%
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \section*{\contentsname
+        \@mkboth{%
+           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+    }
+\makeatother
+
+\usepackage{titlesec}
+
+\titleformat{\section}
+{\normalfont\huge\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}
+{\normalfont\Large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+{\normalfont\large\bfseries}{\thesubsubsection}{1em}{}
+
+% \titleformat{command}[shape]{format}{label}{sep}{before}[after]
+% \titlespacing{command}{left spacing}{before spacing}{after spacing}[right]
+
+\titlespacing{\section}{0pt}{1em}{0.5em}
+\titlespacing{\subsection}{0pt}{0em}{0.25em}
+
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
+
+\def\projectno{NTGAssist}
+
+\begin{document}
+
+\renewcommand{\headrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%          Begin title page           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+   \thispagestyle{fancy}
+   \begin{center}
+        \vspace*{8em}
+   
+        \centering\includegraphics[width=3cm]{img/govhack}
+
+        \vspace{3em}
+
+        \huge{\textbf{GovHack\footnote{GovHack and the GovHack Logo are registered trademarks of GovHack Australia Limited. The GovHack logo is used here for reference purposes only. All rights in the GovHack name and logo are reserved by GovHack Australia Limited.} \\ Team V-SARC \\
+        An Accurate and Trustworthy Chatbot for Data Interactions}}
+
+        \vspace{7em}
+
+        \Large{Proof of Concept \\ User Manual}
+   \end{center}
+
+    \normalsize{Date: \today \\
+    Project: \projectno \\
+    Version 1.0}
+\end{titlepage}
+
+\renewcommand{\headrulewidth}{0.2pt}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%           Begin contents            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newchapter{Preface}
+
+\input{main-matter/introduction}
+
+\newchapter{Disclaimer}
+
+This software and accompanying documentation are provided strictly for proof-of-concept and demonstration purposes only.
+The software is experimental and may contain errors; it is not intended for production use.
+The use of any copyrighted logos, including the GovHack logo, does not imply endorsement, sponsorship, or affiliation.
+All rights in such logos are reserved by their respective owners.
+Use of this software is at your own risk, and the authors accept no liability for any damages resulting from its use.
+
+\newchapter{Team Contact Information}
+
+\begin{table}[h]
+\begin{center}
+    \begin{tabular}{|m{3cm}|m{5.5cm}|m{7cm}|}
+        \hline
+        \rowcolor{heading-grey}\multicolumn{1}{|>{\centering\arraybackslash}m{35mm}|}{\textcolor{white}{\textbf{Name}}} &
+        \multicolumn{1}{>{\centering\arraybackslash}m{55mm}|}{\textcolor{white}{\textbf{Title}}} & 
+        \multicolumn{1}{>{\centering\arraybackslash}m{70mm}|}{\textcolor{white}{\textbf{Contact information}}} \\ \hline
+        \multicolumn{3}{|l|}{\cellcolor{heading2-grey} \textbf{Team V-SARK}} \\ \hline
+        Ayesh Jayasekara & Team Lead & Email: \email{ejkpac@gmail.com} \\ \hline
+        Chathura Janadara & Member & Email: \email{jim.smith@demo.com} \\ \hline
+        Ravindu Supun & Member & Email: \email{jim.smith@demo.com} \\ \hline
+        Vigneshwaran & Member & Email: \email{jim.smith@demo.com} \\ \hline
+        Kavini & Member & Email: \email{jim.smith@demo.com} \\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+\newpage
+
+\newchapter{Prerequisites for Host Systems}
+
+\input{main-matter/pre}
+
+
+\newpage
+
+\newchapter{LLM Setup}
+
+\input{main-matter/llm}
+
+\newchapter{Vector Database Setup}
+
+\input{main-matter/vector}
+
+\newchapter{Ingestion \& Chat Service Setup}
+
+\input{main-matter/boot}
+
+\newchapter{User Interface Setup}
+
+\input{main-matter/user}
+
+\clearpage
+\newchapter{Post Cleanup}
+
+\input{main-matter/post}
+
+\vspace{3cm}
+    
+    \textbf{Thank you! Hope you have enjoyed working with a smarter agent to crunch your data!}
+
+\end{document}

@@ -1,0 +1,24 @@
+The downloaded models and related artifacts maybe deleted from your system once you are satisfied with the demonstration.
+
+The LLM model you downloaded may have consumed a lot of storage from your system.
+Execute following to remove it:
+\begin{lstlisting}
+ ollama rm mistral
+\end{lstlisting}
+
+Similarly, the vector datastore may also be removed from your system. You can use \emph{Docker Desktop} if its installed in your system.
+Or otherwise execute following:
+
+\begin{lstlisting}
+ docker ps -a
+\end{lstlisting}
+
+Above will list out any docker containers you ran previously. Note the container ID and execute following with subsituting container ID placeholder.
+
+\begin{lstlisting}
+ docker stop <ContainerID>
+ docker rm <ContainerID>
+ docker rmi qdrant/qdrant
+\end{lstlisting}
+
+Other components including the user interface and unified microservice can be deleted by removing the relevant folders where you have cloned them to.

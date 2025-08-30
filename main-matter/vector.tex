@@ -1,0 +1,14 @@
+Vector database contains the AI readable metadata in a form of multidimensional vector space.
+Higher the dimensions, higher the accuracy of information retrieval.
+However, in the local setup with extremely limited hardware resources the dimensions are kept to minimal
+viable default provided by \emph{nomic-embed-text} of \textbf{768 dimensions}.
+
+The information retrieval phase embedded to the information retrieval service \emph{(described in next chapter)} is set to
+distance calculation method of \emph{cosine} accordingly.
+
+To spin up a vector store:
+\begin{lstlisting}
+ docker run -p 6333:6333 -p 6334:6334 qdrant/qdrant
+\end{lstlisting}
+
+This will sping up a vector database to be used in next step.

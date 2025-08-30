@@ -1,0 +1,97 @@
+\documentclass[11pt,oneside,a4paper]{book}
+\usepackage[%
+  a4paper,%
+  left = 20mm,%
+  right = 20mm,%
+  textwidth = 178mm,%
+  top = 30mm,%
+  bottom = 30mm,%
+  %heightrounded,% to avoid spurious underfull messages
+  %headheight=30pt,%
+  %headersep=0mm,%
+  %footskip=0mm,%
+  %showframe
+]{geometry}
+\usepackage[sfdefault,light]{FiraSans} %% option 'sfdefault' activates Fira Sans as the default text font
+
+\newcommand{\email}[1]{\href{mailto://#1}{#1}}
+\newcommand{\newchapter}[1]{{\chapter*{#1}
+\addcontentsline{toc}{chapter}{#1}}}
+\newcommand{\newsection}[1]{{\section*{#1}
+\addcontentsline{toc}{section}{#1}}}
+\usepackage[skip=10pt, indent=0pt]{parskip}
+%\usepackage{setspace}
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
+\makeatother
+
+\usepackage{titlesec}
+%\titleformat{name=\chapter,  numberless}[hang]
+%{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{0pt}{}
+
+\titleformat{name=\chapter}[display]{\filright\bfseries}{\huge\chaptername~\thechapter}{20pt}{\Huge}
+\titlespacing*{name=\chapter}{0pt}{25pt}{10pt}
+\titleformat{name=\chapter, numberless}[hang]{\filright\bfseries}{}{0pt}{\Huge}
+\titlespacing*{name=\chapter, numberless}{0pt}{20pt}{10pt}
+
+
+\titleformat*{\section}{\bfseries\Huge}
+
+
+\titlespacing\chapter{0pt}{1.2em}{0.6em}
+% \titlespacing{command}{left spacing}{before spacing}{after spacing}[right]
+
+\titleformat{\subsection}[runin]
+{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+
+%\titleformat{command}[shape]{format}{label}{sep}{before}[after]
+
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{{\firaoldstyle #1}}
+
+\begin{document}
+
+\newchapter{Security strengths}
+
+\newsection{SIEM alerts of vulnerability scans}
+
+During the assessment, the DC security team alerted TCMS engineers of detected vulnerability scanning against their systems. The team was successfully able to identify the TCMS engineer’s attacker IP address within minutes of scanning and was capable of blacklisting TCMS from further scanning actions.
+
+\newchapter{Security weaknesses}
+
+\newsection{Missing multi-factor authentication}
+
+TCMS leveraged multiple attacks against DC login forms using valid credentials harvested through open-source intelligence. Successful logins included employee e-mail accounts through Outlook Web Access and internal access via Active Directory login on the VPN. The use of multi-factor authentication would have prevented full access and required TCMS to utilize additional attack methods to gain internal network access.
+
+\newsection{Weak password policy}
+
+TCMS successfully performed password guessing attacks against DC login forms, providing internal network access. A predictable password format of Summer2018! (season + year + special character) was attempted and successful.
+
+\newsection{Unrestricted login attempts}
+
+During the assessment, TCMS performed multiple brute-force attacks against login forms found on the external network. For all logins, unlimited attempts were allowed, which permitted a successful login on the Outlook Web Access application.
+
+\newchapter{Vulnerabilities by impact}
+
+The following chart illustrates the vulnerabilities found by impact: [INSERT TABLE HERE]
+
+\newchapter{External penetration test findings}
+
+\newsection{Insufficient Lockout Policy -- Outlook Web App (Critical)}
+
+\newsection{Exploitation proof of concept}
+
+TCMS gathered historical breached data found in credentials dumps.  The data amounted to 868 total account credentials (Note: A full list of compromised accounts can be found in ``NTGAssist-867-19 Full Findings.xslx''.).
+
+\chapter{Hello}
+
+\newchapter{Hello}
+
+
+
+\thispagestyle{plain}
+
+\end{document}
